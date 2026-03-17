@@ -18,7 +18,7 @@ This script crawls a local `samples/` directory for audio files (`.wav`, `.mp3`)
 ### 2. Database Loading (`load_to_chroma.py`)
 This script takes the extracted JSON data and loads it into a local ChromaDB vector database.
 
-* It generates a descriptive text string for each beat (e.g., "A aggressive, intense, dark beat in the key of G# Minor with a tempo of 144 BPM...").
+* It generates a descriptive text string for each beat (e.g., "An aggressive, intense, dark beat in the key of G# Minor with a tempo of 144 BPM...").
 * It embeds these descriptions alongside the raw metadata attributes, ensuring the database understands both the semantic vibe and the exact numerical stats of the audio.
 
 ### 3. Semantic Query Agent (`query_agent.py`)
@@ -41,5 +41,33 @@ This is the interactive terminal interface for searching your library.
 ## Setup & Usage
 
 ### 1. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
+```
+
+### 2. Add Environment Variables
+Create a `.env` file in the root directory and add your OpenAI API key:
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+### 3. Run the Pipeline
+Place your audio files into a `samples/` folder. Then, run the following scripts in order:
+
+**Extract Features:**
+```bash
+python extractor.py
+```
+
+**Build Database:**
+```bash
+python load_to_chroma.py
+```
+
+**Search Library:**
+```bash
+python query_agent.py
+```
+*(Once the agent is running, just start typing your queries!)*
